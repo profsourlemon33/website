@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cosmic E-Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0x30z64843mR9Jq05g3l0vjT3v7A5fV6iP0JgG7Tf3F/d5A/8P+1234567890" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom CSS for space theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark space background */
+            color: #e2e8f0; /* Light grey for text */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        /* Gradient for buttons and highlights */
+        .gradient-bg {
+            background: linear-gradient(to right, #4a00e0, #8e2de2); /* Deep purple to vibrant purple */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #4a00e0, #8e2de2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-hidden {
+            display: none;
+        }
+        .nav-link.active {
+            font-weight: 700;
+            color: #8e2de2; /* Highlight active link */
+            border-bottom: 2px solid #8e2de2;
+        }
+        /* Subtle glow on hover for interactive elements */
+        .interactive-element:hover {
+            box-shadow: 0 0 15px rgba(142, 45, 226, 0.6); /* Purple glow */
+            transform: translateY(-2px);
+            transition: all 0.3s ease-in-out;
+        }
+        /* Hero background with subtle movement */
+        #home-hero {
+            background-image: url('https://placehold.co/1920x1080/000000/FFFFFF/png?text=Cosmic+Nebula'); /* Placeholder image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: moveBackground 30s linear infinite alternate; /* Gentle parallax effect */
+        }
+        @keyframes moveBackground {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* Responsive images */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <!-- Main Container - Simulating space -->
+    <div class="min-h-screen flex flex-col">
+
+        <!-- Navigation Header -->
+        <header class="bg-gray-900 bg-opacity-80 backdrop-blur-sm sticky top-0 z-50 shadow-lg border-b border-gray-700">
+            <nav class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-2xl font-bold gradient-text mb-4 md:mb-0">
+                    <i class="fas fa-rocket mr-2"></i> My Cosmic E-Portfolio
+                </div>
+                <ul class="flex space-x-6">
+                    <li><a href="#home" data-page="home" class="nav-link text-lg text-gray-300 hover:text-purple-400 transition duration-300 rounded-md py-1 px-2 interactive-element">Home</a></li>
+                    <li><a href="#resume" data-page="resume" class="nav-link text-lg text-gray-300 hover:text-purple-400 transition duration-300 rounded-md py-1 px-2 interactive-element">Resume</a></li>
+                    <li><a href="#projects" data-page="projects" class="nav-link text-lg text-gray-300 hover:text-purple-400 transition duration-300 rounded-md py-1 px-2 interactive-element">Projects</a></li>
+                    <li><a href="#clubs" data-page="clubs" class="nav-link text-lg text-gray-300 hover:text-purple-400 transition duration-300 rounded-md py-1 px-2 interactive-element">Clubs</a></li>
+                    <li><a href="#awards" data-page="awards" class="nav-link text-lg text-gray-300 hover:text-purple-400 transition duration-300 rounded-md py-1 px-2 interactive-element">Awards</a></li>
+                    <li><a href="#contact" data-page="contact" class="nav-link text-lg text-gray-300 hover:text-purple-400 transition duration-300 rounded-md py-1 px-2 interactive-element">Contact Me</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content Area - Pages -->
+        <main class="flex-grow">
+            <!-- Home Page -->
+            <section id="home" class="container mx-auto px-4 py-16 min-h-screen flex flex-col justify-center section-visible">
+                <div id="home-hero" class="relative text-center py-20 md:py-32 rounded-xl shadow-lg mb-12 overflow-hidden">
+                    <div class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center p-8 rounded-xl">
+                        <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 leading-tight">
+                            Journey Through My <span class="gradient-text">Cosmic Universe</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl">
+                            Blasting off into new frontiers of Aerospace Engineering and space-related missions.
+                        </p>
+                        <button data-page="resume" class="interactive-element gradient-bg text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:shadow-2xl transition duration-300">
+                            Discover My Mission <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- About Me -->
+                <div class="bg-gray-800 p-8 md:p-12 rounded-xl shadow-lg mb-12 border border-gray-700 flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8">
+                    <div class="md:w-1/3 flex justify-center">
+                        <img src="https://placehold.co/200x200/5B21B6/FFFFFF?text=Profile" alt="Profile Picture" class="w-48 h-48 rounded-full object-cover border-4 border-purple-500 shadow-md">
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h2 class="text-4xl font-bold mb-4 gradient-text">My Cosmic Journey</h2>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            Hello! I'm Manas Katragadda, a recent graduate in Aerospace Engineering with a Space Minor from the University of Colorado Boulder. My passion lies in space and space-related missions, driven by a desire to explore and innovate. When I'm not immersed in cosmic endeavors, I enjoy rock-climbing, trekking, playing strategy-based card games, and strumming my ukulele. Join me as I navigate the complexities of code and design, transforming ideas into digital realities.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick Links/Highlights -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-terminal text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Featured Project</h3>
+                        <p class="text-gray-300">Dive into my most ambitious project, simulating a galactic marketplace.</p>
+                        <button data-page="projects" class="mt-4 text-purple-400 hover:underline">View Project <i class="fas fa-chevron-right ml-1"></i></button>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-trophy text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Stellar Achievements</h3>
+                        <p class="text-gray-300">Explore the awards and recognitions that have marked my journey.</p>
+                        <button data-page="awards" class="mt-4 text-purple-400 hover:underline">See Awards <i class="fas fa-chevron-right ml-1"></i></button>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-users-cog text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Crew Collaborations</h3>
+                        <p class="text-gray-300">Discover my involvement in various clubs and communities.</p>
+                        <button data-page="clubs" class="mt-4 text-purple-400 hover:underline">Join the Crew <i class="fas fa-chevron-right ml-1"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resume Page -->
+            <section id="resume" class="container mx-auto px-4 py-16 section-hidden">
+                <h1 class="text-5xl font-bold text-center mb-12 gradient-text">My Flight Plan: Resume</h1>
+
+                <!-- Summary -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-700">
+                    <h2 class="text-3xl font-bold mb-4 text-purple-400">Summary</h2>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Manas Katragadda is a highly motivated US Citizen from Boulder, CO, set to graduate in May 2025 with a B.S. in Aerospace Engineering and minors in Astrophysics and Space from the University of Colorado Boulder. He possesses a strong foundation in embedded systems, structural analysis, and software development for aerospace applications.
+                    </p>
+                </div>
+
+                <!-- Education -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-700">
+                    <h2 class="text-3xl font-bold mb-4 text-purple-400"><i class="fas fa-user-graduate mr-3"></i>Education</h2>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold">B.S. Aerospace Engineering, minors in Astrophysics and Space</h3>
+                        <p class="text-lg text-gray-400">University of Colorado Boulder, Boulder, CO</p>
+                        <p class="text-md text-gray-500">May 2025 | GPA: 3.1/4</p>
+                        <p class="text-md text-gray-500 mt-2">Achievements: General Engineering Scholarship, Awtar and Teji Singh Scholarship, Bottle Rocket Project Accuracy Award Winner, Glider Project Design Award Winner, Ripple Award</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Relevant Coursework: Electronics and Communications, Vehicle Design and Performance, Structures and Statics, Thermodynamics, Formation and Dynamics of Planetary Systems, Aerospace Dynamics and Systems, Orbital Mechanics, Aircraft Dynamics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-700">
+                    <h2 class="text-3xl font-bold mb-4 text-purple-400"><i class="fas fa-briefcase mr-3"></i>Experience</h2>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold">Senior Design - Deployable Magnetosphere Boom (Software Lead - Embedded Systems)</h3>
+                        <p class="text-lg text-gray-400">Boulder, CO</p>
+                        <p class="text-md text-gray-500">August 2024 - May 2025</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Worked and implemented code to extend tapespring boom via motor control using a raspberry pi pico using I2C protocols.</li>
+                            <li>Implemented hard and soft iron calibration on magnetometer validating data against USGS geomagnetic readings.</li>
+                            <li>Designed the motor mounting system using SolidWorks.</li>
+                            <li>Conducted analysis between different types of Deployable Booms to choose ideal boom configuration.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold">Nebula HiveStar Intern</h3>
+                        <p class="text-lg text-gray-400">Lockheed Martin, Highlands Ranch, CO</p>
+                        <p class="text-md text-gray-500">June 2023 - August 2023 & June 2024 - August 2024</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Worked in an Agile environment to construct a GUI from the ground up, received feedback and went through rapid iterations.</li>
+                            <li>Used AutoCad Inventor to design and model drone docks from scratch, optimized and mass manufactured them via 3D printers.</li>
+                            <li>Attended daily scrum and increment plannings to figure out tasking between team members and stretch goals like STK (orbital) integration.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold">Structures (Aerogel Cube Environmental Studies)</h3>
+                        <p class="text-lg text-gray-400">NASA Colorado Space Grant Consortium, Boulder, CO</p>
+                        <p class="text-md text-gray-500">January 2022 - May 2022</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Successfully launched 2 payloads consisting of aerogel, polyethylene foam over 100,000 ft.</li>
+                            <li>Constructed a payload structure and conducted a structural analysis to protect essential equipment.</li>
+                            <li>Conducted Drop and Loading tests to ensure equipment within cubesat would survive G-Force of launch and fall.</li>
+                            <li>Conducted data analysis in Matlab to isolate the differences between aerogel technology and polyethylene foam.</li>
+                            <li>Worked with sensors and embedded systems using C/C++ to integrate, monitor and receive data.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Leadership Experience -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-700">
+                    <h2 class="text-3xl font-bold mb-4 text-purple-400"><i class="fas fa-users-cog mr-3"></i>Leadership Experience</h2>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold">Vice President Intern | Member</h3>
+                        <p class="text-lg text-gray-400">Society of Asian Scientists and Engineers, Boulder, CO</p>
+                        <p class="text-md text-gray-500">August 2023 - Present</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Served on the executive board, organizing events & meetings by partnering with diverse campus groups and companies.</li>
+                            <li>Secured over $5000 in funding by successfully reaching out to 10+ companies.</li>
+                            <li>Head of Decorations for AAPI Event successfully directing volunteers to manage 10+ booths with 500+ attendees.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold">Lead Space Minor Ambassador</h3>
+                        <p class="text-lg text-gray-400">University of Colorado Boulder, Boulder, CO</p>
+                        <p class="text-md text-gray-500">August 2021 - Present</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-300">
+                            <li>Organized outreach events with retired astronaut guest speakers to support community building for space enthusiasts.</li>
+                            <li>Led the largest Star-gazing event (100+ attendees) at CU which involved operating telescopes and managing volunteers.</li>
+                            <li>Consulted for teams of students working on arduino board software to attach sensors that establish atmosphere metrics.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-700">
+                    <h2 class="text-3xl font-bold mb-4 text-purple-400"><i class="fas fa-cogs mr-3"></i>Skills, Languages & Interests</h2>
+                    <div class="flex flex-wrap gap-4 text-lg mb-4">
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">C/C++</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Java</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Python</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">HTML/CSS/JavaScript</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Matlab</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Django</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Microsoft Office</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Soldering & Machining</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Arduino</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">AutoCAD</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Milling & Lathing</span>
+                        <span class="bg-purple-700 text-white px-4 py-2 rounded-full interactive-element">Welding</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">Interests:</h3>
+                    <p class="text-lg text-gray-300">Longboarding, Scrambling (Escaping Death), Basketball, Rocket League</p>
+                </div>
+
+                <div class="text-center mt-12">
+                    <!-- IMPORTANT: Ensure Manas_Katragadda_Resume.pdf is placed in the same directory as index.html -->
+                    <a href="Manas_Katragadda_Resume.pdf" download="Manas_Katragadda_Resume.pdf" class="interactive-element gradient-bg text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:shadow-2xl transition duration-300">
+                        Download Full Resume (PDF) <i class="fas fa-file-download ml-2"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Projects Page -->
+            <section id="projects" class="container mx-auto px-4 py-16 section-hidden">
+                <h1 class="text-5xl font-bold text-center mb-12 gradient-text">My Constellation of Projects</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card: Senior Design - Deployable Magnetosphere Boom -->
+                    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden interactive-element">
+                        <!-- IMPORTANT: Place 'Screenshot_2025-06-12_181951.jpg' in an 'images' folder in your GitHub repo -->
+                        <img src="images/Screenshot_2025-06-12_181951.jpg" alt="Deployable Magnetosphere Boom Exploded View" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-purple-400">Senior Design - Deployable Magnetosphere Boom</h3>
+                            <p class="text-gray-300 text-base mb-4">Worked and implemented code to extend tapespring boom via motor control using a raspberry pi pico using I2C protocols. Implemented hard and soft iron calibration on magnetometer validating data against USGS geomagnetic readings. Designed the motor mounting system using SolidWorks. Conducted analysis between different types of Deployable Booms to choose ideal boom configuration.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">Raspberry Pi Pico</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">I2C Protocols</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">SolidWorks</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">Embedded Systems</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://github.com/yourusername/your-boom-project-repo" target="_blank" class="text-gray-400 hover:text-purple-400 transition duration-300">
+                                    <i class="fab fa-github text-2xl"></i>
+                                </a>
+                                <span class="text-gray-500 text-sm">No Live Demo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card: Glider Project (Design Award) -->
+                    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden interactive-element">
+                        <!-- IMPORTANT: Place 'ASEN2004_-_Milestone_2__1_.jpg' in an 'images' folder in your GitHub repo -->
+                        <img src="images/ASEN2004_-_Milestone_2__1_.jpg" alt="Glider Project Design Overview" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-purple-400">Glider Project (Design Award)</h3>
+                            <p class="text-gray-300 text-base mb-4">Designed and constructed a glider to carry a camera payload within specific static and dynamic stability constraints. Investigated multiple designs using MATLAB to determine an ideal glider configuration to maximize distance. Created a SOLIDWORKS design using lightweight PLA and a 3D printer, successfully launching the glider over 75 feet.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">MATLAB</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">SOLIDWORKS</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">3D Printing</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://github.com/yourusername/your-glider-project-repo" target="_blank" class="text-gray-400 hover:text-purple-400 transition duration-300">
+                                    <i class="fab fa-github text-2xl"></i>
+                                </a>
+                                <span class="text-gray-500 text-sm">No Live Demo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card: NASA Colorado Space Grant Consortium - Structures -->
+                    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden interactive-element">
+                        <!-- IMPORTANT: Place 'Screenshot_2025-06-12_182403.png' in an 'images' folder in your GitHub repo -->
+                        <img src="images/Screenshot_2025-06-12_182403.png" alt="NASA Payload Lab Setup" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-purple-400">NASA Colorado Space Grant Consortium - Structures</h3>
+                            <p class="text-gray-300 text-base mb-4">Successfully launched 2 payloads consisting of aerogel, polyethylene foam over 100,000 ft. Constructed a payload structure and conducted a structural analysis to protect essential equipment. Conducted Drop and Loading tests to ensure equipment within cubesat would survive G-Force of launch and fall. Conducted data analysis in Matlab to isolate the differences between aerogel technology and polyethylene foam. Worked with sensors and embedded systems using C/C++ to integrate, monitor and receive data.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">Matlab</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">C/C++</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">Embedded Systems</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://github.com/yourusername/your-nasa-project-repo" target="_blank" class="text-gray-400 hover:text-purple-400 transition duration-300">
+                                    <i class="fab fa-github text-2xl"></i>
+                                </a>
+                                <span class="text-gray-500 text-sm">No Live Demo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card: Lockheed Martin - Nebula HiveStar Intern (as a project highlight) -->
+                    <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden interactive-element">
+                        <img src="https://placehold.co/400x250/666666/FFFFFF?text=GUI+Design" alt="Lockheed Martin GUI Design" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-purple-400">Lockheed Martin - Nebula HiveStar Intern</h3>
+                            <p class="text-gray-300 text-base mb-4">Worked in an Agile environment to construct a GUI from the ground up, received feedback and went through rapid iterations. Used AutoCad Inventor to design and model drone docks from scratch, optimized and mass manufactured them via 3D printers. Attended daily scrum and increment plannings to figure out tasking between team members and stretch goals like STK (orbital) integration.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">Agile</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">AutoCad Inventor</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">3D Printing</span>
+                                <span class="bg-gray-700 text-gray-300 px-3 py-1 text-sm rounded-full">STK</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://github.com/yourusername/your-lockheed-project-repo" target="_blank" class="text-gray-400 hover:text-purple-400 transition duration-300">
+                                    <i class="fab fa-github text-2xl"></i>
+                                </a>
+                                <span class="text-gray-500 text-sm">No Live Demo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more project cards as needed -->
+                </div>
+            </section>
+
+            <!-- Clubs Page -->
+            <section id="clubs" class="container mx-auto px-4 py-16 section-hidden">
+                <h1 class="text-5xl font-bold text-center mb-12 gradient-text">Crew Manifest: Clubs</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Club Entry 1 -->
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 interactive-element">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/80x80/6A0DAD/FFFFFF?text=Code" alt="Coding Club Logo" class="w-20 h-20 rounded-full mr-4 object-cover">
+                            <div>
+                                <h3 class="text-3xl font-semibold text-purple-400">Society of Asian Scientists and Engineers</h3>
+                                <p class="text-xl text-gray-400">Vice President Intern | Member</p>
+                            </div>
+                        </div>
+                        <p class="text-md text-gray-500 mb-4">August 2023 – Present</p>
+                        <ul class="list-disc list-inside text-gray-300 leading-relaxed">
+                            <li>Served on the executive board, organizing events & meetings by partnering with diverse campus groups and companies.</li>
+                            <li>Secured over $5000 in funding by successfully reaching out to 10+ companies.</li>
+                            <li>Head of Decorations for AAPI Event successfully directing volunteers to manage 10+ booths with 500+ attendees.</li>
+                        </ul>
+                        <a href="https://example.com/sase-club" target="_blank" class="mt-4 inline-block text-purple-400 hover:underline">
+                            Visit Club Website <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+
+                    <!-- Club Entry 2 -->
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 interactive-element">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/80x80/2A0099/FFFFFF?text=Space" alt="Astronomy Society Logo" class="w-20 h-20 rounded-full mr-4 object-cover">
+                            <div>
+                                <h3 class="text-3xl font-semibold text-purple-400">University of Colorado Boulder - Space Minor Ambassador</h3>
+                                <p class="text-xl text-gray-400">Lead Space Minor Ambassador</p>
+                            </div>
+                        </div>
+                        <p class="text-md text-gray-500 mb-4">August 2021 – Present</p>
+                        <ul class="list-disc list-inside text-gray-300 leading-relaxed">
+                            <li>Organized outreach events with retired astronaut guest speakers to support community building for space enthusiasts.</li>
+                            <li>Led the largest Star-gazing event (100+ attendees) at CU which involved operating telescopes and managing volunteers.</li>
+                            <li>Consulted for teams of students working on arduino board software to attach sensors that establish atmosphere metrics.</li>
+                        </ul>
+                        <a href="https://example.com/space-minor-ambassador" target="_blank" class="mt-4 inline-block text-purple-400 hover:underline">
+                            Visit Program Page <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                    <!-- Add more club entries as needed -->
+                </div>
+            </section>
+
+            <!-- Awards Page -->
+            <section id="awards" class="container mx-auto px-4 py-16 section-hidden">
+                <h1 class="text-5xl font-bold text-center mb-12 gradient-text">Celestial Accolades: Awards</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Award Entry 1 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-star text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">General Engineering Scholarship</h3>
+                        <p class="text-lg text-gray-400">University of Colorado Boulder</p>
+                        <p class="text-md text-gray-500 mb-3">[Year]</p>
+                        <p class="text-gray-300">Awarded for academic excellence in engineering.</p>
+                    </div>
+
+                    <!-- Award Entry 2 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-award text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">Awtar and Teji Singh Scholarship</h3>
+                        <p class="text-lg text-gray-400">University of Colorado Boulder</p>
+                        <p class="text-md text-gray-500 mb-3">[Year]</p>
+                        <p class="text-gray-300">Recognizing outstanding students in engineering.</p>
+                    </div>
+
+                    <!-- Award Entry 3 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-rocket text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">Bottle Rocket Project Accuracy Award Winner</h3>
+                        <p class="text-lg text-gray-400">University of Colorado Boulder</p>
+                        <p class="text-md text-gray-500 mb-3">[Year]</p>
+                        <p class="text-gray-300">Awarded for precision and accuracy in bottle rocket design and launch.</p>
+                    </div>
+
+                    <!-- Award Entry 4 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-plane-departure text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">Glider Project Design Award Winner</h3>
+                        <p class="text-lg text-gray-400">University of Colorado Boulder</p>
+                        <p class="text-md text-gray-500 mb-3">January 2022 - February 2022</p>
+                        <p class="text-gray-300">Recognized for innovative design and successful flight of a camera payload glider.</p>
+                    </div>
+
+                     <!-- Award Entry 5 -->
+                     <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 text-center interactive-element">
+                        <i class="fas fa-handshake text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">Ripple Award</h3>
+                        <p class="text-lg text-gray-400">University of Colorado Boulder</p>
+                        <p class="text-md text-gray-500 mb-3">[Year]</p>
+                        <p class="text-gray-300">Awarded for creating positive impact and fostering community.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Me Page -->
+            <section id="contact" class="container mx-auto px-4 py-16 section-hidden">
+                <h1 class="text-5xl font-bold text-center mb-12 gradient-text">Transmit Signal: Contact Me</h1>
+
+                <div class="max-w-3xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 text-center">
+                    <p class="text-lg text-gray-300 mb-8">
+                        Ready to launch a new project or just want to chat about the cosmos? Feel free to reach out!
+                    </p>
+
+                    <div class="mt-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-purple-400">Direct Contact</h3>
+                        <p class="text-xl text-gray-300 mb-4">
+                            <i class="fas fa-envelope mr-3"></i> Email: <a href="mailto:manas.katragadda@gmail.com" class="text-purple-400 hover:underline">manas.katragadda@gmail.com</a>
+                        </p>
+                        <p class="text-lg text-gray-300 mb-2">
+                            <i class="fab fa-linkedin mr-2"></i> LinkedIn: <a href="https://www.linkedin.com/in/manas-katragadda/" target="_blank" class="text-purple-400 hover:underline">linkedin.com/in/manas-katragadda/</a>
+                        </p>
+                        <p class="text-lg text-gray-300 mb-2">
+                            <i class="fab fa-github mr-2"></i> GitHub: <a href="https://github.com/yourusername" target="_blank" class="text-purple-400 hover:underline">github.com/yourusername</a>
+                        </p>
+                        <p class="text-lg text-gray-300 mb-2">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Orbiting Earth from Boulder, CO
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 py-8 border-t border-gray-700 text-center text-gray-400 mt-12">
+            <div class="container mx-auto px-4">
+                <p>&copy; 2025 Manas Katragadda. All rights reserved. Built with <i class="fas fa-heart text-red-500 mx-1"></i> and Cosmic Dust.</p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="https://www.linkedin.com/in/manas-katragadda/" target="_blank" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl interactive-element">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/yourusername" target="_blank" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl interactive-element">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:manas.katragadda@gmail.com" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl interactive-element">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!-- End Main Container -->
+
+    <script>
+        // JavaScript for page navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link, button[data-page]');
+            const sections = document.querySelectorAll('main section');
+
+            // Function to show a specific section and hide others
+            const showPage = (pageId) => {
+                sections.forEach(section => {
+                    if (section.id === pageId) {
+                        section.classList.remove('section-hidden');
+                        section.classList.add('section-visible');
+                    } else {
+                        section.classList.add('section-hidden');
+                        section.classList.remove('section-visible');
+                    }
+                });
+
+                // Update active navigation link
+                navLinks.forEach(link => {
+                    if (link.dataset.page === pageId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+
+                // Update URL hash without causing a full page reload or scroll jump
+                history.pushState(null, '', `#${pageId}`);
+            };
+
+            // Event listeners for navigation links and buttons
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent default link behavior
+                    const pageId = event.currentTarget.dataset.page;
+                    showPage(pageId);
+                });
+            });
+
+            // Handle initial page load based on URL hash
+            const initialHash = window.location.hash.substring(1); // Remove '#'
+            if (initialHash && document.getElementById(initialHash)) {
+                showPage(initialHash);
+            } else {
+                showPage('home'); // Default to home page
+            }
+        });
+    </script>
+</body>
+</html>
