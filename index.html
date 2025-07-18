@@ -3,585 +3,805 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aerospace Engineer Portfolio</title>
+    <title>My Cosmic E-Portfolio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Three.js CDN for 3D graphics -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Dark background */
-            color: #e6edf3; /* Light text color */
-            overflow-x: hidden; /* Prevent horizontal scroll */
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 1rem;
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #38bdf8; /* Sky blue on hover */
-            transform: translateY(-2px);
-        }
-        .nav-link.active {
-            color: #38bdf8;
-            border-bottom: 2px solid #38bdf8;
-            font-weight: 600;
-        }
-        /* Style for interactive elements */
-        button {
-            transition: all 0.3s ease;
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-        }
-        input, textarea {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            color: #e6edf3;
-            transition: all 0.3s ease;
-        }
-        input:focus, textarea:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
-            outline: none;
-        }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #161b22;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #30363d;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #38bdf8;
-        }
-        /* Canvas specific styling */
-        #home-canvas-container {
-            width: 100%;
-            height: 400px; /* Fixed height for canvas */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #0f131a; /* Slightly darker background for canvas */
-            border-radius: 0.75rem; /* rounded-xl */
-            overflow: hidden; /* Hide anything outside */
-            position: relative;
-        }
-        #home-canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
 
     <!-- Header and Navigation -->
-    <header class="bg-gray-800 shadow-lg py-4 px-6 fixed top-0 w-full z-10">
-        <div class="container flex flex-col md:flex-row justify-between items-center">
-            <h1 class="text-2xl font-bold text-sky-400 mb-4 md:mb-0">Aerospace Portfolio</h1>
-            <nav class="flex space-x-6">
-                <a href="#home" class="nav-link text-lg pb-1 active" data-tab="home">Home</a>
-                <a href="#resume" class="nav-link text-lg pb-1" data-tab="resume">Resume</a>
-                <a href="#awards" class="nav-link text-lg pb-1" data-tab="awards">Awards</a>
-                <a href="#projects" class="nav-link text-lg pb-1" data-tab="projects">Projects</a>
-                <a href="#club-activity" class="nav-link text-lg pb-1" data-tab="club-activity">Club Activity</a>
-                <a href="#contact" class="nav-link text-lg pb-1" data-tab="contact">Contact Me</a>
-            </nav>
+    <header class="navbar fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <h1 class="text-xl font-bold" id="header-title">My Cosmic E-Portfolio</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-1">
+                    <a href="#home" class="nav-link active" data-tab="home">Home</a>
+                    <a href="#resume" class="nav-link" data-tab="resume">Resume</a>
+                    <a href="#projects" class="nav-link" data-tab="projects">Projects</a>
+                    <a href="#clubs" class="nav-link" data-tab="clubs">Clubs</a>
+                    <a href="#awards" class="nav-link" data-tab="awards">Awards</a>
+                    <a href="#contact" class="nav-link" data-tab="contact">Contact Me</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-2xl" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-slate-900 border-l border-slate-700 z-50 md:hidden" id="mobile-menu">
+            <div class="p-6">
+                <button class="float-right text-2xl mb-8" id="mobile-menu-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <nav class="flex flex-col space-y-4 mt-8">
+                    <a href="#home" class="nav-link mobile-nav-link" data-tab="home">Home</a>
+                    <a href="#resume" class="nav-link mobile-nav-link" data-tab="resume">Resume</a>
+                    <a href="#projects" class="nav-link mobile-nav-link" data-tab="projects">Projects</a>
+                    <a href="#clubs" class="nav-link mobile-nav-link" data-tab="clubs">Clubs</a>
+                    <a href="#awards" class="nav-link mobile-nav-link" data-tab="awards">Awards</a>
+                    <a href="#contact" class="nav-link mobile-nav-link" data-tab="contact">Contact Me</a>
+                </nav>
+            </div>
         </div>
     </header>
 
     <!-- Main Content Area -->
-    <main class="flex-grow pt-24 container">
-        <!-- Home Tab -->
-        <section id="home" class="tab-content active-tab p-8 bg-gray-800 rounded-xl shadow-2xl mb-8 flex flex-col items-center text-center">
-            <h2 class="text-4xl font-extrabold text-sky-300 mb-6">Greetings, Future Collaborator!</h2>
-            <p class="text-lg leading-relaxed max-w-3xl mb-8">
-                Welcome to my digital launchpad. As an aspiring aerospace engineer, I'm passionate about pushing the boundaries of what's possible in flight and space exploration. Here, you'll find a glimpse into my journey, skills, and contributions in the realm of aerospace.
-            </p>
-            <!-- Interactive 3D Canvas -->
-            <div id="home-canvas-container" class="w-full h-96 rounded-xl shadow-inner mb-8">
-                <canvas id="home-canvas"></canvas>
-                <div id="loading-text" class="absolute text-xl text-gray-400">Loading 3D Model...</div>
+    <main class="pt-20 min-h-screen">
+        <!-- Home Section -->
+        <section id="home" class="tab-content active-tab">
+            <div class="container section-spacing">
+                <!-- Hero Section -->
+                <div id="home-hero" class="fade-in">
+                    <div class="absolute">
+                        <h1 class="text-center mb-6">
+                            Journey Through My <span class="gradient-text">Cosmic Universe</span>
+                        </h1>
+                        <p class="text-center mb-8">
+                            Blasting off into new frontiers of Aerospace Engineering and space-related missions.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center">
+                            <button class="btn-primary" onclick="showTab('projects')">
+                                <i class="fas fa-rocket"></i>
+                                View Projects
+                            </button>
+                            <button class="btn-secondary" onclick="showTab('contact')">
+                                <i class="fas fa-envelope"></i>
+                                Get In Touch
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                                    <!-- About Me and 3D Model Section -->
+                    <div class="about-section slide-up">
+                        <div class="glass-card">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <div class="text-center mb-6">
+                                        <img src="images/Manas_Profile.png" alt="Manas Katragadda Profile Picture" class="mx-auto">
+                                    </div>
+                                    <div class="text-center lg:text-left">
+                                        <h2 class="gradient-text">My Cosmic Journey</h2>
+                                        <p>
+                                            Hello! I'm Manas Katragadda, a recent graduate in Aerospace Engineering with a Space Minor from the University of Colorado Boulder. My passion lies in space and space-related missions, driven by a desire to explore and innovate. When I'm not immersed in cosmic endeavors, I enjoy rock-climbing, trekking, playing strategy-based card games, and strumming my ukulele. Join me as I navigate the complexities of code and design, transforming ideas into digital realities.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Interactive 3D Canvas -->
+                                <div>
+                                    <div id="home-canvas-container">
+                                        <canvas id="home-canvas"></canvas>
+                                        <div id="loading-text" class="absolute inset-0 flex items-center justify-center">
+                                            <div class="text-center">
+                                                <div class="loading-spinner mx-auto mb-4"></div>
+                                                <p class="text-slate-400">Loading 3D Model...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="canvas-instructions">
+                                        Click and drag on the 3D model above to rotate it!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <p class="text-md text-gray-400">
-                (Click and drag on the 3D model above to rotate it!)
-            </p>
-            <p class="text-lg mt-6">
-                Explore the tabs above to learn more about my projects, achievements, and how we can connect to shape the future of aerospace.
-            </p>
         </section>
 
-        <!-- Resume Tab -->
-        <section id="resume" class="tab-content hidden p-8 bg-gray-800 rounded-xl shadow-2xl mb-8">
-            <h2 class="text-3xl font-bold text-sky-300 mb-6">My Flight Plan (Resume)</h2>
-            <div class="prose prose-invert max-w-full">
-                <p>
-                    Below is a summary of my qualifications and experience. For a detailed view, please download my full resume.
-                </p>
-                <ul class="list-disc list-inside space-y-2 mt-4">
-                    <li><strong>Education:</strong> Bachelor of Technology in Aerospace Engineering from [Your University Name], [Year of Graduation]</li>
-                    <li><strong>Key Skills:</strong> CAD (CATIA, SolidWorks), CFD (ANSYS Fluent, OpenFOAM), FEA (NASTRAN, ABAQUS), MATLAB, Python, Aerodynamics, Flight Mechanics, Propulsion Systems, Structural Analysis, Control Systems, Project Management.</li>
-                    <li><strong>Relevant Coursework:</strong> Aircraft Design, Rocket Propulsion, Computational Fluid Dynamics, Aerospace Structures, Automatic Flight Control, Spacecraft Systems.</li>
-                    <li><strong>Experience:</strong>
-                        <ul class="list-circle list-inside ml-6 mt-2">
-                            <li><strong>Intern, [Company Name]</strong> - [Dates]: Assisted in [brief description of responsibilities/achievements, e.g., "design and analysis of UAV wing structures"].</li>
-                            <li><strong>Research Assistant, [University Lab Name]</strong> - [Dates]: Contributed to [brief description, e.g., "numerical simulation of hypersonic flow over re-entry vehicles"].</li>
+        <!-- Resume Section -->
+        <section id="resume" class="tab-content hidden">
+            <div class="container section-spacing">
+                <h1 class="heading-primary">My Flight Plan: Resume</h1>
+
+                <!-- Education -->
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">
+                        <i class="fas fa-user-graduate mr-3"></i>Education
+                    </h2>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-blue-400">B.S. Aerospace Engineering, minors in Astrophysics and Space</h3>
+                        <p class="text-lg text-slate-400">University of Colorado Boulder, Boulder, CO</p>
+                        <p class="text-md text-slate-500 mb-4">May 2025 | GPA: 3.1/4</p>
+                        <p class="text-md text-slate-300 mb-4">
+                            <strong>Achievements:</strong> General Engineering Scholarship, Awtar and Teji Singh Scholarship, Bottle Rocket Project Accuracy Award Winner, Glider Project Design Award Winner, Ripple Award
+                        </p>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-blue-400 mb-2">Relevant Coursework:</h4>
+                            <p class="text-slate-300">
+                                Electronics and Communications, Vehicle Design and Performance, Structures and Statics, Thermodynamics, Formation and Dynamics of Planetary Systems, Aerospace Dynamics and Systems, Orbital Mechanics, Aircraft Dynamics
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">
+                        <i class="fas fa-briefcase mr-3"></i>Experience
+                    </h2>
+                    
+                    <!-- Senior Design Project -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Senior Design - Deployable Magnetosphere Boom</h3>
+                        <p class="text-lg text-slate-400">Software Lead - Embedded Systems | Boulder, CO</p>
+                        <p class="text-md text-slate-500 mb-4">August 2024 - May 2025</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Worked and implemented code to extend tapespring boom via motor control using a raspberry pi pico using I2C protocols.</li>
+                            <li>Implemented hard and soft iron calibration on magnetometer validating data against USGS geomagnetic readings.</li>
+                            <li>Designed the motor mounting system using SolidWorks.</li>
+                            <li>Conducted analysis between different types of Deployable Booms to choose ideal boom configuration.</li>
                         </ul>
-                    </li>
-                </ul>
-                <div class="mt-8 text-center">
-                    <a href="path/to/your/resume.pdf" download="Your_Name_Resume.pdf" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105">
+                    </div>
+
+                    <!-- Lockheed Martin Internship -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Nebula HiveStar Intern</h3>
+                        <p class="text-lg text-slate-400">Lockheed Martin, Highlands Ranch, CO</p>
+                        <p class="text-md text-slate-500 mb-4">June 2023 - August 2023 & June 2024 - August 2024</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Worked in an Agile environment to construct a GUI from the ground up, received feedback and went through rapid iterations.</li>
+                            <li>Used AutoCad Inventor to design and model drone docks from scratch, optimized and mass manufactured them via 3D printers.</li>
+                            <li>Attended daily scrum and increment plannings to figure out tasking between team members and stretch goals like STK (orbital) integration.</li>
+                        </ul>
+                    </div>
+
+                    <!-- NASA Colorado Space Grant -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Structures (Aerogel Cube Environmental Studies)</h3>
+                        <p class="text-lg text-slate-400">NASA Colorado Space Grant Consortium, Boulder, CO</p>
+                        <p class="text-md text-slate-500 mb-4">January 2022 - May 2022</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Successfully launched 2 payloads consisting of aerogel, polyethylene foam over 100,000 ft.</li>
+                            <li>Constructed a payload structure and conducted a structural analysis to protect essential equipment.</li>
+                            <li>Conducted Drop and Loading tests to ensure equipment within cubesat would survive G-Force of launch and fall.</li>
+                            <li>Conducted data analysis in Matlab to isolate the differences between aerogel technology and polyethylene foam.</li>
+                            <li>Worked with sensors and embedded systems using C/C++ to integrate, monitor and receive data.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Leadership Experience -->
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">
+                        <i class="fas fa-users-cog mr-3"></i>Leadership Experience
+                    </h2>
+                    
+                    <!-- SASE Leadership -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Vice President | Intern | Member</h3>
+                        <p class="text-lg text-slate-400">Society of Asian Scientists and Engineers, Boulder, CO</p>
+                        <p class="text-md text-slate-500 mb-4">August 2023 - Present</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Served on the executive board, organizing events & meetings by partnering with diverse campus groups and companies.</li>
+                            <li>Secured over $5000 in funding by successfully reaching out to 10+ companies.</li>
+                            <li>Head of Decorations for AAPI Event successfully directing volunteers to manage 10+ booths with 500+ attendees.</li>
+                        </ul>
+                        <a href="https://www.colorado.edu/studentgroups/sase/" target="_blank" class="mt-4 inline-block text-purple-400 hover:underline">
+                            Visit Club Website <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+
+                    <!-- Space Minor Ambassador -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Lead Space Minor Ambassador</h3>
+                        <p class="text-lg text-slate-400">University of Colorado Boulder, Boulder, CO</p>
+                        <p class="text-md text-slate-500 mb-4">August 2021 - Present</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Organized outreach events with retired astronaut guest speakers to support community building for space enthusiasts.</li>
+                            <li>Led the largest Star-gazing event (100+ attendees) at CU which involved operating telescopes and managing volunteers.</li>
+                            <li>Consulted for teams of students working on arduino board software to attach sensors that establish atmosphere metrics.</li>
+                        </ul>
+                        <a href="https://www.colorado.edu/spaceminor/get-involved" target="_blank" class="mt-4 inline-block text-purple-400 hover:underline">
+                            Visit Program Page <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Experience -->
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">
+                        <i class="fas fa-project-diagram mr-3"></i>Project Experience
+                    </h2>
+                    
+                    <!-- Orbital Mechanics Project -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Orbital Mechanics</h3>
+                        <p class="text-lg text-slate-400">Team Lead</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Developed a spacecraft orbital determination model using MATLAB to chart a trajectory towards asteroid Bennu.</li>
+                            <li>Calculated required delta Vs for spacecraft takeoff and orbit. Modeled to reduce transit times and optimize fuel.</li>
+                            <li>Integrated scanning and orientation algorithms within the model to pinpoint specific points of interest on Bennu's surface.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Glider Project -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Glider Project</h3>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Designed and constructed a glider to carry a camera payload within specific static and dynamic stability constraints</li>
+                            <li>Investigated multiple designs using MATLAB to determine an ideal glider configuration to maximize distance</li>
+                            <li>Created a SOLIDWORKS design using lightweight PLA and a 3D printer, successfully launching the glider over 75 feet</li>
+                        </ul>
+                    </div>
+
+                    <!-- Structures Lab -->
+                    <div class="timeline-item mb-8">
+                        <h3 class="text-2xl font-semibold text-blue-400">Structures Lab - FEM/Torsion/Buckling</h3>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Gained experience in analyzing the internal forces acting on a loaded 16-bay space truss. Calculations were done by comparing the data from experimental models against data using ANSYS which used the Finite Element Model.</li>
+                            <li>Analyzed the differences between analytical and experimental data of a closed and open thin wall specimen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">
+                        <i class="fas fa-cogs mr-3"></i>Skills, Languages & Interests
+                    </h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">HTML/CSS/JavaScript</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Microsoft Office</span>
+                        <span class="skill-tag">Soldering & Machining</span>
+                        <span class="skill-tag">Arduino</span>
+                        <span class="skill-tag">AutoCAD</span>
+                        <span class="skill-tag">Milling & Lathing</span>
+                        <span class="skill-tag">Welding</span>
+                    </div>
+                </div>
+
+                <!-- Download Resume -->
+                <div class="text-center mt-12">
+                    <a href="Manas_Katragadda_Resume0.pdf" download="Manas_Katragadda_Resume0.pdf" class="btn-primary">
+                        <i class="fas fa-file-download"></i>
                         Download Full Resume (PDF)
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Awards Tab -->
-        <section id="awards" class="tab-content hidden p-8 bg-gray-800 rounded-xl shadow-2xl mb-8">
-            <h2 class="text-3xl font-bold text-sky-300 mb-6">Accolades & Achievements</h2>
-            <div class="prose prose-invert max-w-full">
-                <p>
-                    A collection of recognitions and distinctions earned throughout my academic and professional journey.
-                </p>
-                <ul class="list-disc list-inside space-y-4 mt-6">
-                    <li>
-                        <strong>[Award Name 1]</strong> - [Year]
-                        <p class="text-gray-300 text-sm mt-1">Awarded for [brief description of why it was awarded, e.g., "outstanding academic performance in aerospace engineering"].</p>
-                    </li>
-                    <li>
-                        <strong>[Award Name 2]</strong> - [Year]
-                        <p class="text-gray-300 text-sm mt-1">Received recognition for [brief description, e.g., "innovative design in the annual Drone Design Competition"].</p>
-                    </li>
-                    <li>
-                        <strong>[Scholarship Name]</strong> - [Year(s)]
-                        <p class="text-gray-300 text-sm mt-1">Merit-based scholarship for [brief description, e.g., "academic excellence and leadership potential"].</p>
-                    </li>
-                    <li>
-                        <strong>Dean's List / Academic Honors</strong> - [Year(s)]
-                        <p class="text-gray-300 text-sm mt-1">Consistently recognized for achieving high academic standing.</p>
-                    </li>
-                </ul>
-            </div>
-        </section>
+        <!-- Projects Section -->
+        <section id="projects" class="tab-content hidden">
+            <div class="container section-spacing">
+                <h1 class="heading-primary">My Constellation of Projects</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <!-- Senior Design Project -->
+                    <div class="project-card interactive-element cursor-pointer" data-tab="project-senior-design-detail">
+                        <img src="images/Screenshot 2025-06-12 182403.png" alt="Deployable Magnetosphere Boom Exploded View" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-purple-400">Senior Design - Deployable Magnetosphere Boom</h3>
+                            <p class="text-slate-300 text-base mb-4">Worked and implemented code to extend tapespring boom via motor control using a raspberry pi pico using I2C protocols. Designed the motor mounting system using SolidWorks. Click for more details!</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm">Raspberry Pi Pico</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm">SolidWorks</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm">I2C Protocols</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Projects Tab -->
-        <section id="projects" class="tab-content hidden p-8 bg-gray-800 rounded-xl shadow-2xl mb-8">
-            <h2 class="text-3xl font-bold text-sky-300 mb-6">Orbital Innovations (Projects)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-gray-700 p-6 rounded-lg shadow-lg flex flex-col">
-                    <h3 class="text-xl font-semibold text-sky-200 mb-2">Supersonic Jet Wing Design</h3>
-                    <p class="text-gray-300 mb-4 flex-grow">
-                        Designed and simulated a variable-geometry wing for supersonic aircraft using CFD analysis (ANSYS Fluent) to optimize lift-to-drag ratio across flight regimes. Included structural integrity analysis.
-                    </p>
-                    <div class="flex flex-wrap gap-2 text-sm mt-auto">
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Aerodynamics</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">CFD</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">CATIA</span>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="bg-gray-700 p-6 rounded-lg shadow-lg flex flex-col">
-                    <h3 class="text-xl font-semibold text-sky-200 mb-2">Small Satellite Propulsion System Analysis</h3>
-                    <p class="text-gray-300 mb-4 flex-grow">
-                        Investigated propulsion system options for CubeSat applications, comparing efficiency, thrust, and scalability of electric vs. chemical thrusters. Modeled performance in MATLAB.
-                    </p>
-                    <div class="flex flex-wrap gap-2 text-sm mt-auto">
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Propulsion</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">MATLAB</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Space Systems</span>
-                    </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="bg-gray-700 p-6 rounded-lg shadow-lg flex flex-col">
-                    <h3 class="text-xl font-semibold text-sky-200 mb-2">UAV Autonomous Navigation with Sensor Fusion</h3>
-                    <p class="text-gray-300 mb-4 flex-grow">
-                        Developed a prototype control algorithm for a quadcopter using sensor fusion (IMU, GPS, lidar) to achieve autonomous waypoint navigation and obstacle avoidance.
-                    </p>
-                    <div class="flex flex-wrap gap-2 text-sm mt-auto">
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Control Systems</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Python</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Robotics</span>
-                    </div>
-                </div>
-                <!-- Add more projects as needed -->
-                <div class="bg-gray-700 p-6 rounded-lg shadow-lg flex flex-col">
-                    <h3 class="text-xl font-semibold text-sky-200 mb-2">Aerospace Composites Testing</h3>
-                    <p class="text-gray-300 mb-4 flex-grow">
-                        Conducted experimental testing on various composite materials (carbon fiber, fiberglass) for aerospace applications, analyzing their strength-to-weight ratios and fatigue properties.
-                    </p>
-                    <div class="flex flex-wrap gap-2 text-sm mt-auto">
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Materials Science</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Experimental Analysis</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Structures</span>
-                    </div>
-                </div>
-                <div class="bg-gray-700 p-6 rounded-lg shadow-lg flex flex-col">
-                    <h3 class="text-xl font-semibold text-sky-200 mb-2">Rocket Engine Nozzle Optimization</h3>
-                    <p class="text-gray-300 mb-4 flex-grow">
-                        Performed numerical optimization of de Laval nozzle geometry for liquid propellant rocket engines to maximize thrust efficiency under varying altitude conditions.
-                    </p>
-                    <div class="flex flex-wrap gap-2 text-sm mt-auto">
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Propulsion</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">Optimization</span>
-                        <span class="bg-gray-600 text-gray-200 px-3 py-1 rounded-full">CFD</span>
+                    <!-- Glider Project -->
+                    <div class="project-card interactive-element cursor-pointer" data-tab="project-glider-detail">
+                        <img src="images/Glider.png" alt="Glider Project Design Overview" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-purple-400">Glider Project (Design Award)</h3>
+                            <p class="text-slate-300 text-base mb-4">Designed and constructed a glider to carry a camera payload within specific static and dynamic stability constraints. Investigate designs using MATLAB. Click for more details!</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm">MATLAB</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm">SOLIDWORKS</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm">3D Printing</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Club Activity Tab -->
-        <section id="club-activity" class="tab-content hidden p-8 bg-gray-800 rounded-xl shadow-2xl mb-8">
-            <h2 class="text-3xl font-bold text-sky-300 mb-6">Ground Crew (Club Activities)</h2>
-            <div class="prose prose-invert max-w-full">
-                <p>
-                    My involvement in various clubs and organizations where I applied theoretical knowledge and developed practical skills.
-                </p>
-                <ul class="list-disc list-inside space-y-4 mt-6">
-                    <li>
-                        <strong>[Club Name 1, e.g., Aero-Modeling Club]</strong> - [Role, e.g., President/Team Lead] - [Dates]
-                        <p class="text-gray-300 text-sm mt-1">Led a team of 10 to design, build, and fly [type of aircraft, e.g., "a competition-grade remote-controlled glider"], securing [achievement, e.g., "1st place in the national competition"].</p>
-                    </li>
-                    <li>
-                        <strong>[Club Name 2, e.g., Robotics Society]</strong> - [Role, e.g., Design Engineer] - [Dates]
-                        <p class="text-gray-300 text-sm mt-1">Contributed to the mechanical design and fabrication of autonomous ground vehicles, integrating sensor systems and control logic.</p>
-                    </li>
-                    <li>
-                        <strong>[Club Name 3, e.g., [Your University] Rocketry Team]</strong> - [Role, e.g., Structures Sub-team Member] - [Dates]
-                        <p class="text-gray-300 text-sm mt-1">Responsible for stress analysis and material selection for the airframe of high-power rockets, ensuring structural integrity during launch and recovery.</p>
-                    </li>
-                </ul>
+        <!-- Project Detail: Senior Design -->
+        <section id="project-senior-design-detail" class="tab-content hidden">
+            <div class="container section-spacing">
+                <button data-tab="projects" class="btn-secondary">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+                </button>
+                <h1 class="heading-primary">Senior Design - Deployable Magnetosphere Boom</h1>
+
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">Project Overview</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        This senior design project involved developing a deployable magnetosphere boom. As the Software Lead for Embedded Systems, my responsibilities were crucial in the functionality of the system.
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        I developed embedded code to control a motorized tapespring boom using a Raspberry Pi Pico and I2C protocols. I implemented advanced magnetometer calibration—including both hard and soft iron corrections—and validated our sensor data against official USGS geomagnetic readings. I also designed the custom motor mounting system in SolidWorks and played a key role in analyzing and selecting the ideal deployable boom configuration for our mission's requirements. My work ensured that our system could reliably deploy and collect accurate data in a cubesat environment.
+                    </p>
+
+                    <h3 class="heading-tertiary text-purple-400 mb-4">Technologies Used</h3>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="skill-tag">Raspberry Pi Pico</span>
+                        <span class="skill-tag">I2C Protocols</span>
+                        <span class="skill-tag">SolidWorks</span>
+                        <span class="skill-tag">Embedded Systems</span>
+                        <span class="skill-tag">Magnetometer Calibration</span>
+                    </div>
+
+                    <h3 class="heading-tertiary text-purple-400 mb-4">Visuals</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <img src="images/Screenshot 2025-06-12 181951.jpg" alt="Deployable Magnetosphere Boom Exploded View" class="w-full h-auto rounded-lg shadow-md">
+                        <img src="images/graphvisualization_orig.jpg" alt="Magnetometer Calibration Visualization" class="w-full h-auto rounded-lg shadow-md">
+                    </div>
+
+                    <h3 class="heading-tertiary text-purple-400 mb-4">Project Video</h3>
+                    <div class="flex justify-center mb-6">
+                        <video controls class="w-full max-w-2xl h-auto rounded-lg shadow-lg border border-gray-700">
+                            <source src="videos/MagExtendVid.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Contact Me Tab -->
-        <section id="contact" class="tab-content hidden p-8 bg-gray-800 rounded-xl shadow-2xl mb-8">
-            <h2 class="text-3xl font-bold text-sky-300 mb-6">Let's Connect & Collaborate!</h2>
-            <p class="text-lg leading-relaxed mb-6">
-                I'm always open to discussing new opportunities, collaborations, or exciting ideas in aerospace. Feel free to reach out!
-            </p>
+        <!-- Project Detail: Glider -->
+        <section id="project-glider-detail" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <button data-tab="projects" class="btn-secondary mb-8">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+                </button>
+                <h1 class="heading-primary text-center mb-12">Glider Project (Design Award)</h1>
 
-            <form class="space-y-6 max-w-lg mx-auto">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
-                    <input type="text" id="name" name="name" required
-                           class="w-full px-4 py-2 rounded-md focus:ring-sky-500 focus:border-sky-500">
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Your Email</label>
-                    <input type="email" id="email" name="email" required
-                           class="w-full px-4 py-2 rounded-md focus:ring-sky-500 focus:border-sky-500">
-                </div>
-                <div>
-                    <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
-                    <input type="text" id="subject" name="subject"
-                           class="w-full px-4 py-2 rounded-md focus:ring-sky-500 focus:border-sky-500">
-                </div>
-                <div>
-                    <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
-                    <textarea id="message" name="message" rows="5" required
-                              class="w-full px-4 py-2 rounded-md focus:ring-sky-500 focus:border-sky-500"></textarea>
-                </div>
-                <div class="text-center">
-                    <button type="submit"
-                            class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-lg shadow-xl transform transition duration-300 ease-in-out hover:scale-105">
-                        Send Message
-                    </button>
-                </div>
-            </form>
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">Project Overview</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        This project involved the design and construction of a glider specifically engineered to carry a camera payload while adhering to strict static and dynamic stability constraints.
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        For this project, I designed and built a lightweight glider capable of carrying a camera payload while meeting strict stability constraints. I used MATLAB to evaluate different wing and body configurations, ultimately choosing a design that maximized flight distance and efficiency. I modeled the glider in SOLIDWORKS, fabricated it with lightweight PLA using a 3D printer, and successfully launched it over 75 feet. This hands-on experience gave me a deep understanding of aerodynamic tradeoffs and rapid prototyping for flight hardware.
+                    </p>
 
-            <div class="mt-12 text-center">
-                <p class="text-lg font-semibold mb-4">You can also find me on:</p>
-                <div class="flex justify-center space-x-6">
-                    <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"
-                       class="text-sky-400 hover:text-sky-300 transition duration-300 ease-in-out transform hover:scale-110">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                        <span class="sr-only">LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer"
-                       class="text-sky-400 hover:text-sky-300 transition duration-300 ease-in-out transform hover:scale-110">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.799 8.205 11.387.6.11.82-.258.82-.577v-2.203c-3.338.724-4.043-1.61-4.043-1.61-.546-1.387-1.334-1.757-1.334-1.757-1.087-.743.082-.727.082-.727 1.205.086 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.492.998.108-.775.419-1.305.762-1.604-2.665-.304-5.467-1.334-5.467-5.931 0-1.31.465-2.383 1.235-3.22-.122-.304-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.399.011 0 .022 0 .033 0 1.02.001 2.046.134 3.003.399 2.293-1.552 3.3-1.23 3.3-1.23.652 1.653.24 2.872.118 3.176.77.837 1.232 1.91 1.232 3.22 0 4.609-2.807 5.624-5.479 5.923.43.37.823 1.102.823 2.222v3.293c0 .323.21.691.825.576C20.565 21.802 24 17.302 24 12c0-6.627-5.373-12-12-12z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="sr-only">GitHub</span>
-                    </a>
-                    <!-- Add more social links like X (Twitter), personal website if applicable -->
-                    <!-- Example:
-                    <a href="mailto:your.email@example.com" class="text-sky-400 hover:text-sky-300 transition duration-300 ease-in-out transform hover:scale-110">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 12.713l-11.75 7.287h23.5l-11.75-7.287z"/>
-                            <path d="M0 4.288v15.424l9.467-5.856c1.173.725 2.562.725 3.735 0L24 19.712V4.288H0zm12 1.996l-10.74 6.643 10.74 6.643 10.74-6.643-10.74-6.643z"/>
-                        </svg>
-                        <span class="sr-only">Email</span>
-                    </a>
-                    -->
+                    <h3 class="heading-tertiary text-purple-400 mb-4">Key Features</h3>
+                    <ul class="list-disc list-inside text-slate-300 leading-relaxed space-y-2 mb-6">
+                        <li>Material choice: Lightweight Foaming PLA for fuselage and Foam Core for wings.</li>
+                        <li>Fuselage length: 0.75 m; Wingspan: 1 m; Wing Area: 0.1312 m²; Wing Average Chord Length: 0.13 m.</li>
+                        <li>Center of gravity: X_cg = 0.26 m; Aerodynamic Center: X_ac = 0.221 m.</li>
+                        <li>Tapered, high mounted wings (better stability and AR for better glide performance, less chance of wing damage on impact).</li>
+                        <li>Narrow fuselage section between tail and wings (lighter weight).</li>
+                        <li>Rounded fuselage (better aerodynamics w/ less drag).</li>
+                        <li>Forward mounted camera housing (better adjusted center of gravity).</li>
+                    </ul>
+
+                    <h3 class="heading-tertiary text-purple-400 mb-4">Performance Summary</h3>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="min-w-full bg-gray-700 rounded-lg overflow-hidden text-gray-300">
+                            <thead>
+                                <tr class="bg-gray-600 text-left text-sm font-semibold uppercase tracking-wider">
+                                    <th class="py-3 px-4">System Requirements</th>
+                                    <th class="py-3 px-4">Threshold</th>
+                                    <th class="py-3 px-4">Actual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Max Glide Range (m)</td>
+                                    <td class="py-3 px-4">125 m</td>
+                                    <td class="py-3 px-4">71 m</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Max Glide Vel. (m/s)</td>
+                                    <td class="py-3 px-4">12 m/s</td>
+                                    <td class="py-3 px-4">~8.9 m/s</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Max Glide Endurance (s)</td>
+                                    <td class="py-3 px-4">13 s</td>
+                                    <td class="py-3 px-4">8.1 +/- 0.1 s</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Elevator Pitch Control (degrees)</td>
+                                    <td class="py-3 px-4">+/- 10°</td>
+                                    <td class="py-3 px-4">2.42°</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Long. Stability Static Margin (SM)</td>
+                                    <td class="py-3 px-4">10% ≤ SM ≤ 30%</td>
+                                    <td class="py-3 px-4">31%</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Long. Stability - Horz Tail Vol.</td>
+                                    <td class="py-3 px-4">Vh = 0.3</td>
+                                    <td class="py-3 px-4">0.6</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Lateral Stability - Vert. Tail Vol./Spiral</td>
+                                    <td class="py-3 px-4">Vv >= 0.02, B >= 5</td>
+                                    <td class="py-3 px-4">0.04</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Max Wingspan (m)</td>
+                                    <td class="py-3 px-4">b ≤ 1.0 m</td>
+                                    <td class="py-3 px-4">b = 1.0 m</td>
+                                </tr>
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-4">Payload (Camera)</td>
+                                    <td class="py-3 px-4">Secure + safe transport</td>
+                                    <td class="py-3 px-4">Successful</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4">Unit Cost ($)</td>
+                                    <td class="py-3 px-4">Min</td>
+                                    <td class="py-3 px-4">$9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="heading-tertiary text-purple-400 mb-4">Project Video</h3>
+                    <div class="flex justify-center mb-6">
+                        <video controls class="w-full max-w-2xl h-auto rounded-lg shadow-lg border border-gray-700">
+                            <source src="videos/GliderVid.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clubs Section -->
+        <section id="clubs" class="tab-content hidden">
+            <div class="container section-spacing">
+                <h1 class="heading-primary">Crew Manifest: Clubs</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <!-- SASE Club -->
+                    <div class="glass-card interactive-element cursor-pointer" data-tab="club-sase-detail">
+                        <div class="flex items-center mb-4">
+                            <img src="images/images.png" alt="SASE Logo" class="w-20 h-20 rounded-full mr-4 object-cover">
+                            <div>
+                                <h3 class="text-3xl font-semibold text-purple-400">Society of Asian Scientists and Engineers</h3>
+                                <p class="text-xl text-slate-400">Vice President | Intern | Member</p>
+                            </div>
+                        </div>
+                        <p class="text-md text-slate-500 mb-4">August 2023 – May 2025</p>
+                        <p class="text-slate-300 leading-relaxed">Served on the executive board, organized events, and secured funding. Click for more details!</p>
+                    </div>
+
+                    <!-- Space Minor Ambassador -->
+                    <div class="glass-card interactive-element cursor-pointer" data-tab="club-space-minor-detail">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/80x80/2A0099/FFFFFF?text=CU" alt="CU Boulder Logo" class="w-20 h-20 rounded-full mr-4 object-cover">
+                            <div>
+                                <h3 class="text-3xl font-semibold text-purple-400">CU Boulder - Space Minor Ambassador</h3>
+                                <p class="text-xl text-slate-400">Lead Space Minor Ambassador</p>
+                            </div>
+                        </div>
+                        <p class="text-md text-slate-500 mb-4">August 2021 – May 2025</p>
+                        <p class="text-slate-300 leading-relaxed">Organized outreach events, led star-gazing events, and consulted for student teams. Click for more details!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Club Detail: SASE -->
+        <section id="club-sase-detail" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <button data-tab="clubs" class="btn-secondary mb-8">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Clubs
+                </button>
+                <h1 class="heading-primary text-center mb-12">Society of Asian Scientists and Engineers</h1>
+
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">Role & Responsibilities</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        Vice President | Intern | Member<br>
+                        August 2023 – May 2025
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        As Vice President of SASE, I served on the executive board and helped organize events that brought together students, companies, and diverse campus groups. I led fundraising efforts, securing over $5,000 in sponsorships. One of my highlights was directing volunteers and coordinating logistics for our campus-wide AAPI celebration, where we managed 10+ booths and welcomed over 500 attendees. My work focused on building an inclusive community and providing professional development opportunities for our members.
+                    </p>
+                    
+                    <h3 class="heading-tertiary text-purple-400 mb-4">Event Photos</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <img src="images/IMG_0244.jpg" alt="SASE Event 1" class="w-full h-auto rounded-lg shadow-md">
+                        <img src="images/IMG_6426.HEIC" alt="SASE Event 2" class="w-full h-auto rounded-lg shadow-md">
+                        <img src="images/DSC01855 (1).JPG" alt="SASE Event 3" class="w-full h-auto rounded-lg shadow-md">
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="https://www.colorado.edu/studentgroups/sase/" target="_blank" class="btn-primary">
+                            Visit Club Website <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Club Detail: Space Minor Ambassador -->
+        <section id="club-space-minor-detail" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <button data-tab="clubs" class="btn-secondary mb-8">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Clubs
+                </button>
+                <h1 class="heading-primary text-center mb-12">CU Boulder - Space Minor Ambassador</h1>
+
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">Role & Responsibilities</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        Lead Space Minor Ambassador<br>
+                        August 2021 – May 2025
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        In my role as Lead Space Minor Ambassador, I organized outreach events that connected students with leading voices in the space industry, including retired astronaut guest speakers. I planned and led the university's largest stargazing event, overseeing telescope operations and volunteer coordination for more than 100 attendees. I also advised student teams on integrating sensors and software for atmospheric experiments using Arduino, helping foster a hands-on, collaborative environment for space exploration enthusiasts at CU Boulder. Additionally, worked as a TA for a class under Chris Koehler called Pathway to Space.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <img src="images/IMG_8326.JPG" alt="Space Minor Event" class="w-full h-auto rounded-lg shadow-md">
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="https://www.colorado.edu/spaceminor/get-involved" target="_blank" class="btn-primary">
+                            Visit Program Page <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section id="awards" class="tab-content hidden">
+            <div class="container section-spacing">
+                <h1 class="heading-primary">Celestial Accolades: Awards</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Ripple Award -->
+                    <div class="glass-card text-center interactive-element cursor-pointer" data-tab="award-ripple-detail">
+                        <i class="fas fa-handshake text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">Ripple Award</h3>
+                        <p class="text-lg text-slate-400">University of Colorado Boulder</p>
+                        <p class="text-md text-slate-500 mb-3">2025</p>
+                        <p class="text-slate-300">Awarded for creating positive impact and fostering community. Click for more details!</p>
+                    </div>
+
+                    <!-- Cultural Event of the Year -->
+                    <div class="glass-card text-center interactive-element cursor-pointer" data-tab="award-cultural-event-detail">
+                        <i class="fas fa-calendar-alt text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">Cultural Event of the Year</h3>
+                        <p class="text-lg text-slate-400">Society of Asian Scientists and Engineers</p>
+                        <p class="text-md text-slate-500 mb-3">2025</p>
+                        <p class="text-slate-300">Recognized for organizing an outstanding cultural event. Click for more details!</p>
+                    </div>
+
+                    <!-- Student Org of the Year -->
+                    <div class="glass-card text-center interactive-element cursor-pointer" data-tab="award-student-org-detail">
+                        <i class="fas fa-users text-5xl gradient-text mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-400">Student Org of the Year</h3>
+                        <p class="text-lg text-slate-400">University of Colorado Boulder</p>
+                        <p class="text-md text-slate-500 mb-3">2024</p>
+                        <p class="text-slate-300">Awarded to an exemplary student organization. Click for more details!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Award Detail: Ripple Award -->
+        <section id="award-ripple-detail" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <button data-tab="awards" class="btn-secondary mb-8">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Awards
+                </button>
+                <h1 class="heading-primary text-center mb-12">Ripple Award</h1>
+
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">Award Details</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        University of Colorado Boulder<br>
+                        2025
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        This award is in collaboration with the Dennis Small Cultural Center at CU Boulder and recognizes my efforts to enhance cross-cultural awareness and foster a greater appreciation for diversity and inclusion. "I have gone above and beyond in advocating for and facilitating cultural programming, and my impact has extended far beyond its original scope."
+                    </p>
+                    <img src="images/WhatsApp Image 2025-04-24 at 11.05.23 PM.jpeg" alt="Ripple Award Photo" class="w-full h-auto rounded-lg shadow-md mb-6">
+                    <div class="text-center">
+                        <a href="https://www.colorado.edu/involvement/awards#accordion-1247322840-1" target="_blank" class="btn-primary">
+                            Visit CU Boulder Involvement Awards <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Award Detail: Cultural Event -->
+        <section id="award-cultural-event-detail" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <button data-tab="awards" class="btn-secondary mb-8">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Awards
+                </button>
+                <h1 class="heading-primary text-center mb-12">Cultural Event of the Year - Diwali</h1>
+
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">Award Details</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        Society of Asian Scientists and Engineers<br>
+                        2025
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        Helped lead the organization and planning of a Diwali celebration that brought together over 300 students from diverse backgrounds to explore South Asian culture through interactive booths, creative crafts, and traditional cuisine. Collaborating with other student organizations, we created an inclusive, hands-on experience that encouraged cross-cultural learning and engagement. Our event set a new standard for campus cultural programming and fostered a strong sense of community and appreciation for diversity.
+                    </p>
+                    <img src="images/CSI_StudentInvolvementAwards_041625_TO-21.jpg" alt="Diwali Event Photo" class="w-full h-auto rounded-lg shadow-md mb-6">
+                    <div class="text-center">
+                        <a href="https://www.colorado.edu/involvement/awards#accordion-1247322840-1" target="_blank" class="btn-primary">
+                            Visit CU Boulder Involvement Awards <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Award Detail: Student Org -->
+        <section id="award-student-org-detail" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <button data-tab="awards" class="btn-secondary mb-8">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Awards
+                </button>
+                <h1 class="heading-primary text-center mb-12">Student Org of the Year</h1>
+
+                <div class="glass-card mb-8">
+                    <h2 class="heading-secondary text-purple-400 mb-6">Award Details</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        Society of Asian Scientists and Engineers<br>
+                        2024
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        The "Student Organization of the Year" award celebrates an outstanding student group that has demonstrated exceptional leadership, community impact, innovation, and commitment to its members and the wider university. This organization excelled in its mission through impactful events, strong member engagement, and significant contributions to campus life.
+                    </p>
+                    <img src="images/IMG_1559.jpg" alt="Student Org Award Photo" class="w-full h-auto rounded-lg shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="tab-content hidden">
+            <div class="container section-spacing">
+                <h1 class="heading-primary">Transmit Signal: Contact Me</h1>
+                
+                <div class="max-w-4xl mx-auto">
+                    <!-- Contact Information -->
+                    <div class="space-y-8">
+                        <div class="glass-card">
+                            <h2 class="heading-tertiary mb-6">Let's Connect</h2>
+                            <p class="text-lg text-slate-300 mb-8 leading-relaxed text-center">
+                                Ready to launch a new project or just want to chat about the cosmos? I'm always excited to discuss aerospace engineering, space missions, or potential collaborations. Feel free to reach out through any of the channels below!
+                            </p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gradient-to-r from-purple-900/20 to-blue-900/20 hover:from-purple-800/30 hover:to-blue-800/30 transition-all duration-300">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-envelope text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-lg text-white">Email</h4>
+                                        <a href="mailto:manas.katragadda@gmail.com" class="text-purple-300 hover:text-purple-200 transition-colors duration-300">manas.katragadda@gmail.com</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gradient-to-r from-purple-900/20 to-blue-900/20 hover:from-purple-800/30 hover:to-blue-800/30 transition-all duration-300">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg">
+                                        <i class="fab fa-linkedin text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-lg text-white">LinkedIn</h4>
+                                        <a href="https://www.linkedin.com/in/manas-katragadda/" target="_blank" class="text-blue-300 hover:text-blue-200 transition-colors duration-300">linkedin.com/in/manas-katragadda/</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gradient-to-r from-purple-900/20 to-blue-900/20 hover:from-purple-800/30 hover:to-blue-800/30 transition-all duration-300">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-gray-500 to-gray-700 rounded-lg flex items-center justify-center shadow-lg">
+                                        <i class="fab fa-github text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-lg text-white">GitHub</h4>
+                                        <a href="https://github.com/profsourlemon33" target="_blank" class="text-gray-300 hover:text-gray-200 transition-colors duration-300">github.com/profsourlemon33</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gradient-to-r from-purple-900/20 to-blue-900/20 hover:from-purple-800/30 hover:to-blue-800/30 transition-all duration-300">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-lg text-white">Location</h4>
+                                        <p class="text-teal-300">Orbiting Earth from Boulder, CO</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Quick Response Card -->
+                        <div class="glass-card bg-gradient-to-br from-purple-900/30 to-blue-900/30 border-purple-400/50">
+                            <div class="flex items-center justify-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-rocket text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Quick Response Guarantee</h3>
+                            </div>
+                            <p class="text-purple-200 leading-relaxed text-center">
+                                I typically respond to emails within 24 hours. For urgent aerospace projects or collaboration inquiries, expect even faster turnaround times!
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 py-6 mt-12 text-center text-gray-400">
-        <p>&copy; 2025 Manas Katragadda. All rights reserved. | Built with passion and a touch of rocket science.</p>
+    <footer class="bg-slate-900 border-t border-slate-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-rocket text-blue-500"></i>
+                    <span class="font-semibold">My Cosmic E-Portfolio</span>
+                </div>
+                <p class="text-slate-400 mb-4">
+                    &copy; 2025 Manas Katragadda. All rights reserved. Built with <i class="fas fa-heart text-red-500 mx-1"></i> and Cosmic Dust.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/manas-katragadda/" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/profsourlemon33" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:manas.katragadda@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <script>
-        // --- Tab Navigation Logic ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const tabContents = document.querySelectorAll('.tab-content');
-            const homeCanvasContainer = document.getElementById('home-canvas-container');
-            const loadingText = document.getElementById('loading-text');
-
-            // Function to show a specific tab
-            const showTab = (tabId) => {
-                tabContents.forEach(content => {
-                    content.classList.add('hidden');
-                    content.classList.remove('active-tab');
-                });
-                navLinks.forEach(link => link.classList.remove('active'));
-
-                const activeContent = document.getElementById(tabId);
-                const activeLink = document.querySelector(`.nav-link[data-tab="${tabId}"]`);
-
-                if (activeContent) {
-                    activeContent.classList.remove('hidden');
-                    activeContent.classList.add('active-tab');
-                }
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-
-                // If switching to Home tab, ensure canvas is visible and active
-                if (tabId === 'home') {
-                    homeCanvasContainer.style.display = 'flex'; // Show flex container
-                    // Only start 3D animation if it hasn't been started yet
-                    if (!window.threeDInitialized) {
-                        initThreeD();
-                    }
-                } else {
-                    homeCanvasContainer.style.display = 'none'; // Hide canvas container for other tabs
-                }
-            };
-
-            // Event listeners for navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const tabId = event.target.dataset.tab;
-                    showTab(tabId);
-                    // Update URL hash without page reload for direct linking
-                    history.pushState(null, '', `#${tabId}`);
-                });
-            });
-
-            // Handle initial tab display based on URL hash
-            const initialTab = window.location.hash.substring(1) || 'home';
-            showTab(initialTab);
-
-            // --- Three.js for Interactive 3D Model on Home Tab ---
-            let scene, camera, renderer, satelliteGroup; // Changed 'object' to 'satelliteGroup'
-            let targetRotationX = 0, targetRotationY = 0;
-
-            function initThreeD() {
-                try {
-                    const canvas = document.getElementById('home-canvas');
-                    if (!canvas) {
-                        console.error('Canvas element not found for Three.js');
-                        return;
-                    }
-                    window.threeDInitialized = true; // Mark as initialized
-
-                    // Scene
-                    scene = new THREE.Scene();
-                    scene.background = new THREE.Color(0x0f131a); // Match container background
-
-                    // Camera
-                    camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-                    camera.position.z = 2.5; // Adjusted camera distance for satellite
-
-                    // Renderer
-                    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-                    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-                    renderer.setPixelRatio(window.devicePixelRatio); // Handle retina displays
-                    loadingText.style.display = 'none'; // Hide loading text once renderer is ready
-
-                    // Handle window resizing
-                    const onWindowResize = () => {
-                        const newWidth = homeCanvasContainer.clientWidth;
-                        const newHeight = homeCanvasContainer.clientHeight;
-                        renderer.setSize(newWidth, newHeight);
-                        camera.aspect = newWidth / newHeight;
-                        camera.updateProjectionMatrix();
-                    };
-                    window.addEventListener('resize', onWindowResize);
-
-                    // --- Satellite Model Components ---
-                    satelliteGroup = new THREE.Group(); // Create a group to hold all satellite parts
-                    scene.add(satelliteGroup); // Add the group to the scene
-
-                    // Materials
-                    const bodyMaterial = new THREE.MeshPhongMaterial({
-                        color: 0xcccccc, // Light gray for metallic body
-                        specular: 0xffffff,
-                        shininess: 80
-                    });
-                    const solarPanelMaterial = new THREE.MeshPhongMaterial({
-                        color: 0x222244, // Dark blue/purple for solar panels
-                        emissive: 0x000022, // Subtle glow
-                        specular: 0x8888aa,
-                        shininess: 50,
-                        side: THREE.DoubleSide // Important for thin panels
-                    });
-                    const antennaMaterial = new THREE.MeshPhongMaterial({
-                        color: 0x888888, // Gray for antenna
-                        specular: 0xaaaaaa,
-                        shininess: 30
-                    });
-
-                    // Main Body (Cube)
-                    const bodyGeometry = new THREE.BoxGeometry(0.7, 0.7, 0.7);
-                    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-                    satelliteGroup.add(body);
-
-                    // Solar Panels
-                    const panelGeometry = new THREE.BoxGeometry(0.05, 1.2, 0.5); // Thin, wider, taller
-                    const panel1 = new THREE.Mesh(panelGeometry, solarPanelMaterial);
-                    panel1.position.set(0.4, 0, 0); // Position relative to body
-                    satelliteGroup.add(panel1);
-
-                    const panel2 = new THREE.Mesh(panelGeometry, solarPanelMaterial);
-                    panel2.position.set(-0.4, 0, 0); // Position on the other side
-                    satelliteGroup.add(panel2);
-
-                    // Antenna (Cylinder and small sphere)
-                    const antennaCylinderGeometry = new THREE.CylinderGeometry(0.03, 0.03, 0.5, 8);
-                    const antennaCylinder = new THREE.Mesh(antennaCylinderGeometry, antennaMaterial);
-                    antennaCylinder.position.set(0, 0.5, 0); // Above the body
-                    satelliteGroup.add(antennaCylinder);
-
-                    const antennaSphereGeometry = new THREE.SphereGeometry(0.08, 16, 16);
-                    const antennaSphere = new THREE.Mesh(antennaSphereGeometry, antennaMaterial);
-                    antennaSphere.position.set(0, 0.75, 0); // Top of the cylinder
-                    satelliteGroup.add(antennaSphere);
-
-                    // Lighting
-                    const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
-                    scene.add(ambientLight);
-
-                    const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.7);
-                    directionalLight1.position.set(5, 5, 5).normalize();
-                    scene.add(directionalLight1);
-
-                    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-                    directionalLight2.position.set(-5, -5, -5).normalize();
-                    scene.add(directionalLight2);
-
-                    // Mouse Interaction
-                    canvas.addEventListener('mousemove', onDocumentMouseMove);
-                    canvas.addEventListener('touchmove', onDocumentTouchMove, { passive: false }); // for mobile
-                    canvas.addEventListener('mousedown', onDocumentMouseDown);
-                    canvas.addEventListener('mouseup', onDocumentMouseUp);
-                    canvas.addEventListener('touchstart', onDocumentTouchStart, { passive: false }); // for mobile
-                    canvas.addEventListener('touchend', onDocumentTouchEnd);
-
-                    let isDragging = false;
-                    let previousMouseX = 0;
-                    let previousMouseY = 0;
-
-                    function onDocumentMouseDown(event) {
-                        isDragging = true;
-                        previousMouseX = event.clientX;
-                        previousMouseY = event.clientY;
-                    }
-
-                    function onDocumentMouseUp(event) {
-                        isDragging = false;
-                    }
-
-                    function onDocumentMouseMove(event) {
-                        if (isDragging) {
-                            const deltaX = event.clientX - previousMouseX;
-                            const deltaY = event.clientY - previousMouseY;
-
-                            targetRotationY += deltaX * 0.005; // Adjust sensitivity
-                            targetRotationX += deltaY * 0.005;
-
-                            previousMouseX = event.clientX;
-                            previousMouseY = event.clientY;
-                        }
-                    }
-
-                    function onDocumentTouchStart(event) {
-                        if (event.touches.length === 1) {
-                            event.preventDefault(); // Prevent scrolling
-                            isDragging = true;
-                            previousMouseX = event.touches[0].clientX;
-                            previousMouseY = event.touches[0].clientY;
-                        }
-                    }
-
-                    function onDocumentTouchEnd(event) {
-                        isDragging = false;
-                    }
-
-                    function onDocumentTouchMove(event) {
-                        if (isDragging && event.touches.length === 1) {
-                            event.preventDefault(); // Prevent scrolling
-                            const deltaX = event.touches[0].clientX - previousMouseX;
-                            const deltaY = event.touches[0].clientY - previousMouseY;
-
-                            targetRotationY += deltaX * 0.005;
-                            targetRotationX += deltaY * 0.005;
-
-                            previousMouseX = event.touches[0].clientX;
-                            previousMouseY = event.touches[0].clientY;
-                        }
-                    }
-
-                    // Animation Loop
-                    function animate() {
-                        requestAnimationFrame(animate);
-
-                        // Smoothly interpolate rotations for the satellite group
-                        satelliteGroup.rotation.y += (targetRotationY - satelliteGroup.rotation.y) * 0.05;
-                        satelliteGroup.rotation.x += (targetRotationX - satelliteGroup.rotation.x) * 0.05;
-
-                        // Add a subtle continuous rotation if not dragging
-                        if (!isDragging) {
-                            satelliteGroup.rotation.y += 0.002;
-                            satelliteGroup.rotation.x += 0.001;
-                        }
-
-                        renderer.render(scene, camera);
-                    }
-                    animate(); // Start the animation loop
-                } catch (error) {
-                    console.error('Error initializing Three.js:', error);
-                    loadingText.textContent = 'Failed to load 3D model.';
-                }
-            }
-            // Initialize 3D when the window loads and home tab is active
-            if (initialTab === 'home') {
-                initThreeD();
-            }
-        });
-    </script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
